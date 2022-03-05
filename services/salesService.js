@@ -15,7 +15,7 @@ const getAllSalesService = async () => {
 
 const getSalesByIdService = async (id) => {
   const rawSale = await getSalesByIdModel(id);
-  
+
   if (!rawSale.length) return null;
 
   const saleDataById = rawSale.map((salesData) => ({
