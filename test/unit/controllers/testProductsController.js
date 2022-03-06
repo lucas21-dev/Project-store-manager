@@ -47,7 +47,7 @@ describe('Testa a camada controllers dos products', () => {
 
   describe('Quando a requisição não encontra o ID', () => {
     before(() => {
-      req.params = {
+      req.params = { 
         id: 10,
       }
       res.status = sinon.stub().returns(res);
