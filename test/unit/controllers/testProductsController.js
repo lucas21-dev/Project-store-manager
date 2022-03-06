@@ -1,7 +1,7 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
 
-const { getAllProducts, getProductsById } = require('../../../controllers/ProductsController');
+const productController = require('../../../controllers/ProductsController');
 const productService = require('../../../services/productsService');
 const productModel = require('../../../models/productsModel');
 
@@ -44,7 +44,7 @@ describe('Testa a camada controllers dos products', () => {
     })
 
     it('Retorna um response com o status 200', async () => {
-      await getAllProducts(req, res);
+      await productController.getAllProducts(req, res);
 
       expect(res.status.calledWith(200)).to.be.true;
     })
@@ -65,7 +65,7 @@ describe('Testa a camada controllers dos products', () => {
     })
 
     it('Retorna uma response com status 200', async () => {
-      await getProductsById(req, res);
+      await productController.getProductsById(req, res);
 
       expect(res.status.calledWith(200)).to.be.true;
     })
@@ -73,20 +73,18 @@ describe('Testa a camada controllers dos products', () => {
 
   describe('Quando a requisição não encontra o ID', () => {
     before(() => {
-      sinon.stub(productService, 'getByIdService').resolves(dbSucessResponse);
-      req.params = { 
-        id: 10,
-      }
+      sinon.stub(productService, 'getByIdService').resolves([]);
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
     });
-
+    
     after(() => {
       productService.getByIdService.restore()
     })
-
+    
     it('Retorna uma response com status 404', async () => {
-      await getProductsById(req, res);
+      req.params = 10;
+      await productController.getProductsById(req, res);
 
       expect(res.status.calledWith(404)).to.be.true;
     })

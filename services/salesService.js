@@ -1,7 +1,7 @@
-const { getAllSalesModel, getSalesByIdModel } = require('../models/salesModel');
+const salesModels = require('../models/salesModel');
 
 const getAllSalesService = async () => {
-  const rawSales = await getAllSalesModel();
+  const rawSales = await salesModels.getAllSalesModel();
 
   const salesData = rawSales.map((sale) => ({
     saleId: sale.sale_id,
@@ -14,7 +14,7 @@ const getAllSalesService = async () => {
 };
 
 const getSalesByIdService = async (id) => {
-  const rawSale = await getSalesByIdModel(id);
+  const rawSale = await salesModels.getSalesByIdModel(id);
 
   if (!rawSale.length) return null;
 
