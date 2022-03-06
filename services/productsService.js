@@ -19,7 +19,16 @@ const updateProductService = async ({ id, name, quantity }) => {
   };
 };
 
+const deleteProductService = async (id) => {
+  const productDeleted = await productsModel.deleteProductModel(id);
+
+  if (!productDeleted.rowls) return { message: 'Product not found' };
+
+  return productDeleted;
+};
+
 module.exports = {
   getByIdService,
   updateProductService,
+  deleteProductService,
 };
