@@ -25,6 +25,10 @@ const getSalesByIdModel = async (id) => {
   return result;
 };
 
+// const createSaleModel = async () => {
+
+// };
+
 module.exports = {
   getAllSalesModel,
   getSalesByIdModel,

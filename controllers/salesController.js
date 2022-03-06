@@ -15,6 +15,12 @@ const getSalesById = async (req, res, _next) => {
   return res.status(200).json(filteredSales);
 };
 
+// const createSale = async (req, res, next) => {
+//   // const productCreated = await ;
+
+//   // return res.status(201).json(productCreated);
+// };
+
 module.exports = {
   getAllSales,
   getSalesById,
