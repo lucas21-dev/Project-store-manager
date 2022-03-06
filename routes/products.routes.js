@@ -3,6 +3,7 @@ const {
   getAllProducts,
   getProductsById,
   createProduct,
+  updateProduct,
 } = require('../controllers/ProductsController');
 const { validateNewProduct } = require('../middlewares');
 
@@ -14,6 +15,6 @@ router.get('/:id', getProductsById);
 
 router.post('/', validateNewProduct, createProduct);
 
-router.put('/:id', validateNewProduct);
+router.put('/:id', validateNewProduct, updateProduct);
 
 module.exports = router;
