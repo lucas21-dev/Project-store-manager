@@ -38,6 +38,10 @@ describe('Testa a camada controllers dos products', () => {
       res.json = sinon.stub().returns();
     });
 
+    after(() => {
+      productService.getByIdService.restore()
+    })
+
     it('Retorna uma response com status 200', async () => {
       await getProductsById(req, res);
 
@@ -47,12 +51,17 @@ describe('Testa a camada controllers dos products', () => {
 
   describe('Quando a requisição não encontra o ID', () => {
     before(() => {
+      sinon.stub(productService, 'getByIdService').resolves(dbSucessResponse);
       req.params = { 
         id: 10,
       }
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
     });
+
+    after(() => {
+      productService.getByIdService.restore()
+    })
 
     it('Retorna uma response com status 404', async () => {
       await getProductsById(req, res);

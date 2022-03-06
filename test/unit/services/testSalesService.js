@@ -5,8 +5,6 @@ const salesService = require('../../../services/salesService');
 const salesModel = require('../../../models/salesModel');
 
 describe('Testa a camada Service das sales', () => {
-  
-
   describe('Verifica o service getAll', () => {
     const mockModel = [
       {
