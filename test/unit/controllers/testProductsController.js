@@ -3,6 +3,7 @@ const { expect } = require('chai');
 
 const { getAllProducts, getProductsById } = require('../../../controllers/ProductsController');
 const productService = require('../../../services/productsService');
+const productModel = require('../../../models/productsModel');
 
 describe('Testa a camada controllers dos products', () => {
   const req = {};
@@ -15,10 +16,31 @@ describe('Testa a camada controllers dos products', () => {
     "quantity": 10
   };
 
+  const dbAllSucessResponse = [
+    [
+      {
+      "id": 1,
+      "name": "produto A",
+      "quantity": 10
+    },
+    {
+      "id": 2,
+      "name": "produto B",
+      "quantity": 20
+    }
+    ],
+    []
+  ];
+
   describe('Quando a requisição getAll é retornada com sucesso', () => {
     before(() => {
+      sinon.stub(productModel, 'getAllProductsModel').resolves(dbAllSucessResponse);
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
+    })
+
+    after(() => {
+      productModel.getAllProductsModel.restore();
     })
 
     it('Retorna um response com o status 200', async () => {
